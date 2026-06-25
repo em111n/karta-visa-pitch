@@ -436,9 +436,10 @@ const socials = {
   ig: "M6 3.5h6c1.4 0 2.5 1.1 2.5 2.5v6c0 1.4-1.1 2.5-2.5 2.5H6A2.5 2.5 0 0 1 3.5 12V6A2.5 2.5 0 0 1 6 3.5Zm0 1A1.5 1.5 0 0 0 4.5 6v6A1.5 1.5 0 0 0 6 13.5h6a1.5 1.5 0 0 0 1.5-1.5V6A1.5 1.5 0 0 0 12 4.5H6Zm3 2A2.5 2.5 0 1 1 9 11.5 2.5 2.5 0 0 1 9 6.5Zm0 1A1.5 1.5 0 1 0 9 10.5 1.5 1.5 0 0 0 9 7.5Zm3.2-1.7a.6.6 0 1 1 0 1.2.6.6 0 0 1 0-1.2Z",
 };
 const socialUrls = {
-  in: "https://www.linkedin.com/company/karta-io",
+  in: "https://www.linkedin.com/company/joinkarta/",
   x:  "https://x.com/Karta_Personal",
   tg: "https://t.me/karta",
+  tg_news: "https://t.me/karta_news",
   ig: "https://www.instagram.com/karta.personal",
 };
 function Social({ k }) {
@@ -478,4 +479,5 @@ function Stagger({ text, style, base = 0.15, step = 0.03 }) {
 Object.assign(window, {
   useReveal, Reveal, CountUp, Label, ArrowIcon, Button, PillButton, HCard,
   Section, SectionHero, StaggerTitle, Statement, Hi, Bar, PhoneMockup, HandScreen, Social, Stagger,
+  socials, socialUrls,
 });

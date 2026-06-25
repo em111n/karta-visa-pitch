@@ -63,7 +63,7 @@ function App() {
       <div className="chapter" style={{ position: "relative" }}><PlatformVision /></div>
       <div className="chapter" style={{ position: "relative" }}><Vision /></div>
       <div className="chapter" style={{ position: "relative" }}><Roadmap /></div>
-      <Close />
+      <div className="chapter" style={{ position: "relative" }}><Close /></div>
     </React.Fragment>
   );
 }

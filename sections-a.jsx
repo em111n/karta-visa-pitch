@@ -34,6 +34,7 @@ function Header({ active }) {
   const [open, setOpen] = uS(false);
   const [solid, setSolid] = uS(false);
   const [copied, setCopied] = uS(false);
+  const pillRef = uR(null);
   const copyEmail = () => { try { navigator.clipboard.writeText("olsamo@karta.io"); } catch (e) {} setCopied(true); setTimeout(() => setCopied(false), 1800); };
   uE(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -41,19 +42,65 @@ function Header({ active }) {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  uE(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        if (document.activeElement && typeof document.activeElement.blur === "function") {
+          document.activeElement.blur();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+  uE(() => {
+    if (!open) return;
+    const onPointerDown = (e) => {
+      if (pillRef.current && !pillRef.current.contains(e.target)) {
+        setOpen(false);
+        if (document.activeElement && typeof document.activeElement.blur === "function") {
+          document.activeElement.blur();
+        }
+      }
+    };
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => window.removeEventListener("pointerdown", onPointerDown);
+  }, [open]);
   const go = (id) => {
     setOpen(false);
     const el = document.getElementById(id);
     if (!el) return;
-    // If the target id is a sticky section divider, skip past it to the key
-    // content frame (its next sibling) rather than landing on the divider.
     const sticky = getComputedStyle(el).position === "sticky";
     const target = (sticky && el.nextElementSibling) ? el.nextElementSibling : el;
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
+    const dest = target.getBoundingClientRect().top + window.scrollY - 90;
+    const distance = Math.abs(dest - window.scrollY);
+    // Short hops: keep smooth scroll. Long hops: fade-cut to avoid disorienting fly-through.
+    if (distance < window.innerHeight * 1.5) {
+      window.scrollTo({ top: dest, behavior: "smooth" });
+      return;
+    }
+    let overlay = document.getElementById("__nav_fade");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "__nav_fade";
+      overlay.style.cssText = "position:fixed;inset:0;background:#040404;z-index:9999;opacity:0;pointer-events:none;transition:opacity .22s ease";
+      document.body.appendChild(overlay);
+    }
+    overlay.style.opacity = "0";
+    requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = "1"; }));
+    setTimeout(() => {
+      const html = document.documentElement;
+      const prev = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
+      window.scrollTo(0, dest);
+      html.style.scrollBehavior = prev;
+      setTimeout(() => { overlay.style.opacity = "0"; }, 30);
+    }, 240);
   };
   return (
     <header style={{ position: "fixed", top: 16, left: 0, right: 0, zIndex: 60, width: "min(100% - 28px, 1000px)", margin: "0 auto" }}>
-      <div style={{
+      <div ref={pillRef} style={{
         position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
         width: open ? "min(100%, 900px)" : "min(100%, 300px)",
         background: "rgba(20,20,20,0.55)",
@@ -75,7 +122,9 @@ function Header({ active }) {
             <span>{open ? "Close" : "Menu"}</span>
           </button>
         </div>
-        <div style={{ maxHeight: open ? 620 : 0, opacity: open ? 1 : 0, overflow: "hidden", transition: "max-height .55s cubic-bezier(.44,0,.16,1) " + (open ? ".05s" : "0s") + ", opacity .35s ease" }}>
+        <div style={{ maxHeight: open ? 620 : 0, opacity: open ? 1 : 0, overflow: "hidden", transition: open
+          ? "max-height .55s cubic-bezier(.44,0,.16,1) .05s, opacity .35s ease"
+          : "max-height .3s cubic-bezier(.55,0,.4,1) .08s, opacity .2s ease" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr", gap: 14, padding: "6px 16px 18px" }}>
             <nav style={{ background: "rgba(13,13,13,0.5)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "14px 10px", display: "grid", gridTemplateColumns: "1fr 1fr", gridAutoFlow: "column", gridTemplateRows: "repeat(7, auto)", gap: "2px 14px", alignContent: "start" }}>
               {SECTIONS.map((it, i) => {
@@ -84,8 +133,8 @@ function Header({ active }) {
                   <button key={it.id} onClick={() => go(it.id)}
                     style={{ textAlign: "left", background: "transparent", border: "none", cursor: "pointer", padding: "9px 12px", borderRadius: 8, display: "flex", alignItems: "baseline", gap: 12,
                       color: on ? "var(--pp-acid)" : "#fafafa", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 19, letterSpacing: "-.01em",
-                      transform: open ? "translateY(0)" : "translateY(8px)", opacity: open ? 1 : 0,
-                      transition: `transform .4s cubic-bezier(.44,0,.16,1) ${0.05 + i * 0.022}s, opacity .4s ease ${0.05 + i * 0.022}s, color .2s, background .2s` }}
+                      whiteSpace: "nowrap",
+                      transition: "color .2s, background .2s" }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,.04)"; if (!on) e.currentTarget.style.color = "var(--pp-acid)"; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; if (!on) e.currentTarget.style.color = "#fafafa"; }}>
                     <span style={{ fontSize: 12, color: on ? "var(--pp-acid)" : "var(--pp-fg-4)", fontVariantNumeric: "tabular-nums" }}>{it.n}</span>
@@ -94,7 +143,9 @@ function Header({ active }) {
                 );
               })}
             </nav>
-            <div style={{ padding: "12px 8px", display: "flex", flexDirection: "column", gap: 18, transform: open ? "translateY(0)" : "translateY(10px)", opacity: open ? 1 : 0, transition: "transform .5s cubic-bezier(.44,0,.16,1) .12s, opacity .5s ease .12s" }}>
+            <div style={{ padding: "12px 8px", display: "flex", flexDirection: "column", gap: 18, transform: open ? "translateY(0)" : "translateY(6px)", opacity: open ? 1 : 0, transition: open
+              ? "transform .5s cubic-bezier(.44,0,.16,1) .12s, opacity .5s ease .12s"
+              : "transform .22s ease-in, opacity .18s ease-in" }}>
               <h3 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 26, color: "#fafafa", letterSpacing: "-.01em" }}>Get in touch.</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                 <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Jana Olsamo · Karta</p>
@@ -104,9 +155,30 @@ function Header({ active }) {
                 </button>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Follow Karta:</p>
-                <div style={{ display: "flex", gap: 8 }}><Social k="in" /><Social k="x" /><Social k="tg" /><Social k="ig" /></div>
+                <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Join Karta</p>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {[
+                    { k: "ig", label: "Instagram", url: "https://www.instagram.com/karta.personal" },
+                    { k: "tg", label: "@karta_news", url: "https://t.me/karta_news" },
+                    { k: "x", label: "X", url: "https://x.com/Karta_Personal" },
+                    { k: "in", label: "LinkedIn", url: "https://www.linkedin.com/company/joinkarta/" },
+                  ].map(s => (
+                    <a key={s.k} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                      style={{ width: 44, height: 44, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.08)", color: "#fafafa", borderRadius: 999, textDecoration: "none", transition: "background .2s, border-color .2s" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(204,255,0,.08)"; e.currentTarget.style.borderColor = "rgba(204,255,0,.35)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,.05)"; e.currentTarget.style.borderColor = "rgba(255,255,255,.08)"; }}>
+                      <svg width="20" height="20" viewBox="0 0 18 18" fill="#fafafa"><path d={socials[s.k]} /></svg>
+                    </a>
+                  ))}
+                </div>
               </div>
+              <a href="https://t.me/karta" target="_blank" rel="noopener noreferrer"
+                style={{ marginTop: 4, display: "inline-flex", alignSelf: "flex-start", alignItems: "center", gap: 10, background: "var(--pp-acid)", color: "#0a0a0a", borderRadius: 999, padding: "12px 22px", textDecoration: "none", fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 15, letterSpacing: "-.01em" }}>
+                <svg width="22" height="12" viewBox="43 93 202 104" fill="none" aria-hidden="true">
+                  <path d="M234.659 93C242.077 93.0008 245.789 101.965 240.544 107.203L208.596 139.111C205.348 142.355 205.339 147.628 208.596 150.877L240.537 182.793C245.78 188.031 242.064 196.993 234.645 196.993L181.527 197C179.319 196.994 177.201 196.122 175.641 194.565L128.471 147.44C126.912 145.88 124.797 145.003 122.586 145.006H51.3258C46.7329 145.006 43.0004 141.288 43 136.688V101.329C43.003 96.7399 46.7247 93.0119 51.3325 93.009H117.709C122.302 93.0149 126.032 96.7307 126.035 101.331V124.924C126.036 132.336 135.008 136.047 140.253 130.809L175.646 95.4526C177.205 93.8931 179.325 93.0188 181.536 93.0157L234.654 93.009V93H234.659Z" fill="#0a0a0a"/>
+                </svg>
+                Karta App
+              </a>
             </div>
           </div>
         </div>
@@ -192,7 +264,11 @@ function HeroSplit() {
       <HeroShaderBg intensity={.85} bias="right" />
       <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 1440, margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(0,1.15fr) minmax(0,.85fr)", gap: 56, alignItems: "center" }} className="hero-split-grid">
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          <span className="pp-rise" style={{ animationDelay: ".05s" }}><Label variant="acid">partnership pitch · 2026</Label></span>
+          <div className="pp-rise" style={{ animationDelay: ".05s", display: "flex", alignItems: "center", gap: 18 }}>
+            <img src="assets/karta-logo-acid.svg" alt="Karta" style={{ height: 26 }} />
+            <span style={{ color: "var(--pp-fg-4)", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 18, letterSpacing: ".12em" }}>×</span>
+            <img src="assets/partners/visa-acid.svg" alt="Visa" style={{ height: 20 }} />
+          </div>
           <h1 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: "clamp(44px,5.6vw,86px)", lineHeight: 1.0, letterSpacing: "-.03em", color: "#fafafa" }}>
             <Stagger text="Money as borderless" base={0.12} step={0.02} /><br /><Stagger text="as the people" base={0.45} step={0.02} /> <span style={{ color: "var(--pp-acid)" }}><Stagger text="who use it." base={0.7} step={0.03} /></span>
           </h1>
@@ -200,8 +276,8 @@ function HeroSplit() {
             One wallet to earn, hold, spend and send across any country.
           </p>
           <div className="pp-rise" style={{ animationDelay: "1.15s", display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <PillButton href="#problem" onClick={scrollToCb("problem")} variant="accent" glyph="arrow">Explore the round</PillButton>
-            <PillButton href="#traction" onClick={scrollToCb("traction")} glyph="trend">See traction</PillButton>
+            <PillButton href="#traction" onClick={scrollToCb("traction")} variant="accent" glyph="trend">See traction</PillButton>
+            <PillButton href="#platform" onClick={scrollToCb("platform")} glyph="arrow">Platform vision</PillButton>
           </div>
         </div>
         <div aria-hidden="true" />

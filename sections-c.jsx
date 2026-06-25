@@ -46,7 +46,7 @@ function Vision() {
         parts={[
           { t: "Karta becomes the default " },
           { t: "financial home", hi: true },
-          { t: " for a whole generation." },
+          { t: " for a borderless generation." },
         ]}
         lead="The generation that doesn't fit one country anymore." />
       <Section tightTop dataLabel="08 Vision · detail">
@@ -476,47 +476,47 @@ function InvestorForm() {
 /* mission close + footer */
 function Close() {
   return (
-    <footer id="ask" style={{ position: "relative", zIndex: 1, background: "radial-gradient(120% 140% at 50% 120%, rgba(204,255,0,.14), transparent 60%), #050505", padding: "clamp(72px, 9vw, 140px) clamp(20px, 3vw, 56px)", display: "flex", justifyContent: "center" }}>
-      <div style={{ width: "100%", maxWidth: 1440, display: "flex", flexDirection: "column", gap: "clamp(40px, 5vw, 72px)" }}>
-        <Reveal>
-          <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--pp-acid)" }}>[ 13 · the ask ]</span>
-        </Reveal>
-        <Reveal delay={0.04}>
-          <h2 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: "clamp(40px,7vw,96px)", lineHeight: 1.0, letterSpacing: "-.035em", color: "var(--pp-fg)", maxWidth: 1100, textWrap: "balance" }}>
-            Let's build this <span style={{ color: "var(--pp-acid)" }}>together.</span>
-          </h2>
-        </Reveal>
-
+    <React.Fragment>
+      <SectionHero id="ask" num="13" kicker="partnership" align="left" glow
+        parts={[{ t: "Let's build this " }, { t: "together.", hi: true }]}
+        lead="What we're asking for, and what Visa gets in return." />
+      <Section tightTop dataLabel="13 Partnership" style={{ background: "var(--pp-page)", position: "relative", zIndex: 2 }}>
         <Reveal delay={0.08}>
           <div className="partner-cta-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(18px, 2.4vw, 28px)" }}>
             {/* WHAT WE'RE ASKING */}
-            <div style={{ padding: "clamp(24px, 3vw, 40px)", borderRadius: 12, border: "1px solid var(--pp-line)", background: "var(--pp-card)", display: "flex", flexDirection: "column", gap: 18 }}>
-              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>What we're asking</span>
-              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
-                <li style={{ display: "flex", alignItems: "baseline", gap: 12, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(17px, 1.9vw, 22px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.01em" }}>
-                  <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>·</span> Introduction to a BIN sponsor bank
+            <div style={{ padding: "clamp(32px, 3.6vw, 56px) clamp(28px, 3.2vw, 48px)", borderRadius: 14, border: "1px solid var(--pp-line)", background: "linear-gradient(165deg, rgba(255,255,255,.035), rgba(255,255,255,.005) 70%)", display: "flex", flexDirection: "column", gap: "clamp(20px, 2.4vw, 28px)" }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 14, paddingBottom: "clamp(16px, 2vw, 22px)", borderBottom: "1px solid var(--pp-line)" }}>
+                <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".18em", color: "var(--pp-fg-4)", fontVariantNumeric: "tabular-nums" }}>01</span>
+                <h3 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: "clamp(22px, 2vw, 30px)", letterSpacing: ".06em", textTransform: "uppercase", color: "var(--pp-fg)", lineHeight: 1.05 }}>What we're asking</h3>
+              </div>
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "clamp(12px, 1.4vw, 18px)" }}>
+                <li style={{ display: "flex", alignItems: "baseline", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.012em" }}>
+                  <span style={{ color: "var(--pp-acid)", fontWeight: 700, fontSize: "1.2em", lineHeight: 1 }}>·</span> Introduction to a BIN sponsor bank
                 </li>
-                <li style={{ display: "flex", alignItems: "baseline", gap: 12, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(17px, 1.9vw, 22px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.01em" }}>
-                  <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>·</span> Visa partnership framework
+                <li style={{ display: "flex", alignItems: "baseline", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.012em" }}>
+                  <span style={{ color: "var(--pp-acid)", fontWeight: 700, fontSize: "1.2em", lineHeight: 1 }}>·</span> Visa partnership framework
                 </li>
-                <li style={{ display: "flex", alignItems: "baseline", gap: 12, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(17px, 1.9vw, 22px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.01em" }}>
-                  <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>·</span> Timeline: <span style={{ color: "var(--pp-acid)" }}>Q3 2026</span>
+                <li style={{ display: "flex", alignItems: "baseline", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.012em" }}>
+                  <span style={{ color: "var(--pp-acid)", fontWeight: 700, fontSize: "1.2em", lineHeight: 1 }}>·</span> Timeline: <span style={{ color: "var(--pp-acid)" }}>Q3 2026</span>
                 </li>
               </ul>
             </div>
 
             {/* WHAT VISA GETS */}
-            <div style={{ padding: "clamp(24px, 3vw, 40px)", borderRadius: 12, border: "1px solid rgba(204,255,0,.28)", background: "linear-gradient(135deg, rgba(204,255,0,.07), rgba(204,255,0,.015) 70%)", display: "flex", flexDirection: "column", gap: 18 }}>
-              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--pp-acid)" }}>What Visa gets</span>
-              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
-                <li style={{ display: "flex", alignItems: "baseline", gap: 12, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(17px, 1.9vw, 22px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.01em" }}>
-                  <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>·</span> Growing GTV on Visa rails
+            <div style={{ padding: "clamp(32px, 3.6vw, 56px) clamp(28px, 3.2vw, 48px)", borderRadius: 14, border: "1px solid rgba(204,255,0,.32)", background: "linear-gradient(135deg, rgba(204,255,0,.08), rgba(204,255,0,.02) 70%)", display: "flex", flexDirection: "column", gap: "clamp(20px, 2.4vw, 28px)" }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 14, paddingBottom: "clamp(16px, 2vw, 22px)", borderBottom: "1px solid rgba(204,255,0,.18)" }}>
+                <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".18em", color: "var(--pp-acid)", fontVariantNumeric: "tabular-nums", opacity: .7 }}>02</span>
+                <h3 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: "clamp(22px, 2vw, 30px)", letterSpacing: ".06em", textTransform: "uppercase", color: "var(--pp-acid)", lineHeight: 1.05 }}>What Visa gets</h3>
+              </div>
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "clamp(12px, 1.4vw, 18px)" }}>
+                <li style={{ display: "flex", alignItems: "baseline", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.012em" }}>
+                  <span style={{ color: "var(--pp-acid)", fontWeight: 700, fontSize: "1.2em", lineHeight: 1 }}>·</span> Growing GTV on Visa rails
                 </li>
-                <li style={{ display: "flex", alignItems: "baseline", gap: 12, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(17px, 1.9vw, 22px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.01em" }}>
-                  <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>·</span> New high-value cardholder segment
+                <li style={{ display: "flex", alignItems: "baseline", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.012em" }}>
+                  <span style={{ color: "var(--pp-acid)", fontWeight: 700, fontSize: "1.2em", lineHeight: 1 }}>·</span> New high-value cardholder segment
                 </li>
-                <li style={{ display: "flex", alignItems: "baseline", gap: 12, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(17px, 1.9vw, 22px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.01em" }}>
-                  <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>·</span> Platform-level volume as we scale white-label
+                <li style={{ display: "flex", alignItems: "baseline", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.35, color: "var(--pp-fg)", letterSpacing: "-.012em" }}>
+                  <span style={{ color: "var(--pp-acid)", fontWeight: 700, fontSize: "1.2em", lineHeight: 1 }}>·</span> Platform-level volume as we scale white-label
                 </li>
               </ul>
             </div>
@@ -528,7 +528,7 @@ function Close() {
           <div style={{ display: "flex", gap: "clamp(20px, 3vw, 40px)", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", borderTop: "1px solid var(--pp-line)", paddingTop: "clamp(28px, 3vw, 40px)" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>Contact</span>
-              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontStretch: "125%", fontSize: "clamp(20px, 2.4vw, 28px)", color: "var(--pp-fg)", letterSpacing: "-.01em" }}>Jana Olsamo</span>
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontStretch: "125%", fontSize: "clamp(20px, 2.4vw, 28px)", color: "var(--pp-acid)", letterSpacing: "-.01em" }}>Jana Olsamo</span>
               <a href="mailto:olsamo@karta.io" className="inl-link" style={{ fontFamily: "var(--pp-font-body)", fontSize: 16, color: "var(--pp-fg-2)", letterSpacing: "-.005em" }}>olsamo@karta.io</a>
             </div>
             <img src="assets/karta-logo-white.svg" alt="Karta" style={{ height: 34, opacity: .9 }} />
@@ -538,14 +538,14 @@ function Close() {
         <Reveal delay={0.18}>
           <p className="pp-caption" style={{ margin: 0, color: "var(--pp-fg-4)" }}>Karta × Visa · Partnership pitch · Figures as of April 2026 (Manifest Beautiful Table, Mixpanel).</p>
         </Reveal>
-      </div>
 
-      <style>{`
-        @media (max-width: 720px) {
-          .partner-cta-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
-    </footer>
+        <style>{`
+          @media (max-width: 720px) {
+            .partner-cta-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
+      </Section>
+    </React.Fragment>
   );
 }
 
