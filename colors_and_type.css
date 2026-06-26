@@ -91,7 +91,33 @@
 
   /* ---- Motion ---- */
   --pp-ease: cubic-bezier(0.44, 0, 0.16, 1); /* smooth, slightly snappy */
-  --pp-dur:  0.4s;
+  --pp-ease-in: cubic-bezier(0.55, 0, 0.4, 1);  /* tight close / collapse */
+  --pp-dur:        0.4s;
+  --pp-dur-fast:   0.2s;   /* hover, color/bg transitions */
+  --pp-dur-snappy: 0.22s;  /* menu close, click feedback */
+  --pp-dur-slow:   0.55s;  /* menu open / width expand */
+  --pp-dur-fade:   0.22s;  /* fade-cut nav overlay */
+
+  /* ---- Z-index scale ---- */
+  --pp-z-sticky-divider: 0;  /* SectionHero sticky background layer */
+  --pp-z-section-body:   2;  /* Slide body, must cover sticky acid bleed */
+  --pp-z-header:        60;  /* fixed nav pill */
+  --pp-z-overlay:     9999;  /* full-page fade-cut overlay */
+
+  /* ---- Accent surfaces (acid-tinted cards / glows) ---- */
+  --pp-acid-tint-1:    rgba(204, 255, 0, 0.02);
+  --pp-acid-tint-2:    rgba(204, 255, 0, 0.05);
+  --pp-acid-tint-3:    rgba(204, 255, 0, 0.08);
+  --pp-acid-tint-4:    rgba(204, 255, 0, 0.14);
+  --pp-acid-border:    rgba(204, 255, 0, 0.32);
+  --pp-acid-divider:   rgba(204, 255, 0, 0.18);
+  --pp-acid-card-bg:   linear-gradient(135deg, rgba(204,255,0,.08), rgba(204,255,0,.02) 70%);
+
+  /* ---- Glass surface (header pill, raised modals) ---- */
+  --pp-glass-bg:       rgba(20, 20, 20, 0.55);
+  --pp-glass-border:   rgba(255, 255, 255, 0.12);
+  --pp-glass-blur:     blur(22px) saturate(165%);
+  --pp-glass-highlight: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0) 70%);
 }
 
 /* ============================================================

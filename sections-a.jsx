@@ -11,13 +11,11 @@ const SECTIONS = [
   { n: "04", label: "Solution", id: "solution" },
   { n: "05", label: "How it works", id: "how" },
   { n: "06", label: "Traction", id: "traction" },
-  { n: "07", label: "Monetization", id: "monetization" },
-  { n: "08", label: "Market", id: "market" },
-  { n: "09", label: "Where we operate", id: "where" },
-  { n: "10", label: "Platform vision", id: "platform" },
-  { n: "11", label: "Vision", id: "vision" },
-  { n: "12", label: "Roadmap", id: "roadmap" },
-  { n: "13", label: "Partnership", id: "ask" },
+  { n: "07", label: "Market", id: "market" },
+  { n: "08", label: "Where we operate", id: "where" },
+  { n: "09", label: "Platform vision", id: "platform" },
+  { n: "10", label: "Roadmap", id: "roadmap" },
+  { n: "11", label: "Partnership", id: "ask" },
 ];
 
 function MenuIcon({ open }) {

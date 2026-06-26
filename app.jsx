@@ -57,11 +57,9 @@ function App() {
       <div className="chapter" style={{ position: "relative" }}><SolutionHandV2 /></div>
       <div className="chapter" style={{ position: "relative" }}><HowItWorks /></div>
       <div className="chapter" style={{ position: "relative" }}><Traction /></div>
-      <div className="chapter" style={{ position: "relative" }}><Monetization /></div>
       <div className="chapter" style={{ position: "relative" }}><MarketRedesign /></div>
       <div className="chapter" style={{ position: "relative" }}><WhereWeOperate /></div>
       <div className="chapter" style={{ position: "relative" }}><PlatformVision /></div>
-      <div className="chapter" style={{ position: "relative" }}><Vision /></div>
       <div className="chapter" style={{ position: "relative" }}><Roadmap /></div>
       <div className="chapter" style={{ position: "relative" }}><Close /></div>
     </React.Fragment>

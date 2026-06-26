@@ -257,7 +257,7 @@ const SCENARIOS = [
 function Roadmap() {
   return (
     <React.Fragment>
-      <SectionHero id="roadmap" num="12" kicker="roadmap" align="left"
+      <SectionHero id="roadmap" num="10" kicker="roadmap" align="left"
         parts={[{ t: "Twelve months. " }, { t: "One destination.", hi: true }]}
         lead="Each quarter compounds on the last. Every release stacks on the same platform layer." />
       <Section tightTop dataLabel="10 Roadmap · detail">
@@ -477,10 +477,10 @@ function InvestorForm() {
 function Close() {
   return (
     <React.Fragment>
-      <SectionHero id="ask" num="13" kicker="partnership" align="left" glow
+      <SectionHero id="ask" num="11" kicker="partnership" align="left" glow
         parts={[{ t: "Let's build this " }, { t: "together.", hi: true }]}
         lead="What we're asking for, and what Visa gets in return." />
-      <Section tightTop dataLabel="13 Partnership" style={{ background: "var(--pp-page)", position: "relative", zIndex: 2 }}>
+      <Section tightTop dataLabel="11 Partnership" style={{ background: "var(--pp-page)", position: "relative", zIndex: 2 }}>
         <Reveal delay={0.08}>
           <div className="partner-cta-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(18px, 2.4vw, 28px)" }}>
             {/* WHAT WE'RE ASKING */}
@@ -1061,11 +1061,11 @@ function MarketRedesign() {
         }
       `}</style>
 
-      <SectionHero id="market" num="08" kicker="market" align="left" glow
-        parts={[{ t: "Stablecoins crossed Visa. " }, { t: "Here's our slice.", hi: true }]}
+      <SectionHero id="market" num="07" kicker="market" align="left" glow
+        parts={[{ t: "A $33T market that runs on " }, { t: "Visa rails.", hi: true }]}
         lead="A macro shift in 2025. A bounded, growing opportunity for Karta." />
 
-      <Section tightTop dataLabel="08 Market" style={{ overflowX: "clip", overflowY: "visible" }}>
+      <Section tightTop dataLabel="07 Market" style={{ overflowX: "clip", overflowY: "visible" }}>
         <div className="mkt-frame">
 
           {/* === The macro shift — compact bar duel === */}
@@ -1171,7 +1171,7 @@ function MarketRedesign() {
 function WhereWeOperate() {
   return (
     <React.Fragment>
-      <SectionHero id="where" num="09" kicker="where we operate" align="left" glow
+      <SectionHero id="where" num="08" kicker="where we operate" align="left" glow
         parts={[{ t: "Live across " }, { t: "three regions.", hi: true }, { t: " Two more next." }]}
         lead="Concrete markets, not aspirational TAM." />
       <Section tightTop dataLabel="09 Where we operate" style={{ overflowX: "clip", overflowY: "visible" }}>
@@ -1232,7 +1232,7 @@ const PV_HORIZONS = [
 function PlatformVision() {
   return (
     <React.Fragment>
-      <SectionHero id="platform" num="10" kicker="financial platform vision" align="left" glow
+      <SectionHero id="platform" num="09" kicker="financial platform vision" align="left" glow
         parts={[{ t: "Karta is building the financial infrastructure for the " }, { t: "borderless economy.", hi: true }]}
         lead="One platform. Every money job. Built to scale beyond Karta." />
       <Section tightTop dataLabel="10 Platform vision" style={{ overflowX: "clip", overflowY: "visible" }}>
